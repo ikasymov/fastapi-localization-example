@@ -30,10 +30,18 @@ def languages():
             {'code': 'en', 'title': 'English'}]
 ```
 ```shell script
+# Russia
 $ curl --location --request GET 'http://127.0.0.1:8000/language' \
 --header 'Accept-Language: ru'
 
 [{"code":"ru","title":"Русский"},{"code":"en","title":"Английский"}]
+
+
+# English
+$ curl --location --request GET 'http://127.0.0.1:8000/language' \
+--header 'Accept-Language: en'
+
+[{"code":"ru","title":"Russia"},{"code":"en","title":"English"}]
 ```
 
 manual partial translation
@@ -50,10 +58,18 @@ def countries():
 ```
 
 ```shell script
+# Russian
 $ curl --location --request GET 'http://127.0.0.1:8000/country' \
 --header 'Accept-Language: ru'
 
 [{"code":"ru","title":"Русский"},{"code":"us","title":"USA"}]
+
+
+# English
+$ curl --location --request GET 'http://127.0.0.1:8000/country' \
+--header 'Accept-Language: en'
+
+[{"code":"ru","title":"Russia"},{"code":"us","title":"USA"}]
 ```
 
 error validation 
@@ -73,6 +89,7 @@ def countries(value: InputSchema):
     return value
 ```
 ```shell script
+# Russia
 $ curl --location --request POST 'http://127.0.0.1:8000/input' \
 --header 'Accept-Language: ru' \
 --header 'Content-Type: application/json' \
@@ -86,6 +103,26 @@ $ curl --location --request POST 'http://127.0.0.1:8000/input' \
                 "email"
             ],
             "msg": "значение не является действительным адресом электронной почты",
+            "type": "value_error.email"
+        }
+    ]
+}
+
+
+# English
+$ curl --location --request POST 'http://127.0.0.1:8000/input' \
+--header 'Accept-Language: en' \
+--header 'Content-Type: application/json' \
+--data-raw '{"email": "invalid_email"}'
+
+{
+    "detail": [
+        {
+            "loc": [
+                "body",
+                "email"
+            ],
+            "msg": "value is not a valid email address",
             "type": "value_error.email"
         }
     ]
