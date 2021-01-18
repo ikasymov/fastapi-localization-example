@@ -53,7 +53,7 @@ class LanguageTranslatableSchema(BaseModel):
     '/language',
     response_class=TranslateJsonResponse,
     response_model=List[LanguageTranslatableSchema])
-def languages():
+async def languages():
     return [{'code': 'ru', 'title': 'Russia'},
             {'code': 'en', 'title': 'English'}]
 
@@ -61,7 +61,7 @@ def languages():
 @app.get(
     '/country',
     response_class=TranslateJsonResponse)
-def countries():
+async def countries():
     return [{'code': 'ru', 'title': _('Russia')},
             {'code': 'us', 'title': 'USA'}]
 
@@ -73,5 +73,5 @@ class InputSchema(BaseModel):
 @app.post(
     '/input',
     response_class=TranslateJsonResponse)
-def countries(value: InputSchema):
+async def countries(value: InputSchema):
     return value
