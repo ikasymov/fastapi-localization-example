@@ -10,6 +10,12 @@ $ uvicorn app.main:app --reload
 Example
 
 ```python
+from typing import List
+
+from pydantic import BaseModel
+from fastapi_localization import TranslateJsonResponse
+from fastapi_localization import TranslatableStringField
+
 class LanguageTranslatableSchema(BaseModel):
     code: str
     title: TranslatableStringField
@@ -32,6 +38,9 @@ $ curl --location --request GET 'http://127.0.0.1:8000/language' \
 
 manual partial translation
 ```python
+from fastapi_localization import TranslateJsonResponse
+from fastapi_localization import lazy_gettext as _
+
 @app.get(
     '/country',
     response_class=TranslateJsonResponse)
@@ -50,6 +59,9 @@ $ curl --location --request GET 'http://127.0.0.1:8000/country' \
 error validation 
 
 ```python
+from pydantic import BaseModel, EmailStr
+from fastapi_localization import TranslateJsonResponse
+
 class InputSchema(BaseModel):
     email = EmailStr()
 
