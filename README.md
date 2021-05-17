@@ -1,13 +1,10 @@
-# fastapi_localization-example
+# Example application with localization via [fastapi-localization](https://github.com/ikasymov/fastapi-localization)
 
-**fastapi_localization-example** - simple rest application with language localization wia Accept-Language headers.
 
 Run
 ```shell script
 $ uvicorn app.main:app --reload
 ```
-
-Example
 
 ```python
 from typing import List
@@ -127,5 +124,6 @@ $ curl --location --request POST 'http://127.0.0.1:8000/input' \
         }
     ]
 }
+
 ```
 
